@@ -1,23 +1,32 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KOS LEGAL JABAR - Dinas Perumahan & Permukiman Jawa Barat</title>
-    <meta name="description" content="Sistem Informasi & Legalisasi Usaha Rumah Kos Resmi Dinas Perumahan dan Permukiman Provinsi Jawa Barat." />
-    <meta property="og:title" content="KOS LEGAL JABAR - Dinas Perumahan & Permukiman Jawa Barat" />
-    <meta property="og:description" content="Sistem Informasi & Legalisasi Usaha Rumah Kos Resmi Dinas Perumahan dan Permukiman Provinsi Jawa Barat." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  </head>
-  <body class="bg-slate-50 text-slate-900 antialiased font-sans">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard DPKP - Kos Legal Jabar</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head><body class="bg-[#F5F7FB]">
+<header class="bg-white border-b px-6 py-3 flex justify-between items-center">
+<div class="flex gap-3 items-center"><div class="w-10 h-10 bg-[#0B3D91] text-white rounded-xl flex items-center justify-center font-black">D</div><div><b>DPKP JABAR</b><div class="text-[11px] text-gray-500">128 kos | 102 terverifikasi | UU HKPD 2022</div></div></div>
+<div class="flex gap-2"><a href="index.html" class="text-xs bg-gray-100 px-3 py-1 rounded-full">Pitch Deck</a><a href="app.html" class="text-xs bg-[#0B3D91] text-white px-3 py-1 rounded-full">App Pemilik</a></div>
+</header>
+<div class="p-6 max-w-7xl mx-auto">
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-white rounded-2xl p-5 border"><div class="text-[11px] text-gray-500">TOTAL KOS</div><div class="text-3xl font-black" id="tot">128</div></div>
+<div class="bg-white rounded-2xl p-5 border"><div class="text-[11px] text-gray-500">TERVERIFIKASI</div><div class="text-3xl font-black text-green-600">102</div></div>
+<div class="bg-white rounded-2xl p-5 border"><div class="text-[11px] text-gray-500">PENDING</div><div class="text-3xl font-black text-orange-500">18</div></div>
+<div class="bg-white rounded-2xl p-5 border"><div class="text-[11px] text-gray-500">ILEGAL</div><div class="text-3xl font-black text-red-500">8</div></div>
+</div>
+<div class="mt-6 bg-white rounded-2xl p-5 border">
+<div class="flex justify-between"><h3 class="font-bold">Data Kos - Sinkron dengan App.html (Tambah Cabang)</h3><button onclick="tambah()" class="text-xs bg-green-600 text-white px-3 py-1 rounded-full">+ Tambah Cabang</button></div>
+<table class="w-full text-xs mt-4"><thead class="text-gray-400 border-b"><tr><th class="text-left py-2">Nama Kos</th><th>Pemilik</th><th>Status</th><th>Omzet/Thn</th><th>Pajak 2022</th><th>Aksi</th></tr></thead><tbody id="tb"></tbody></table>
+<div id="info" class="mt-4 bg-[#0B3D91] text-white rounded-xl p-3 text-xs"></div>
+</div>
+</div>
+<script>
+let data=JSON.parse(localStorage.getItem('KOS_V2')||'[]');
+if(data.length==0){data=[{nama:'Kos Berkah Dago',pemilik:'Owner 1',kamar:12,terisi:10,harga:1500000},{nama:'Kos Berkah Dipatiukur',pemilik:'Owner 1',kamar:10,terisi:8,harga:1200000},{nama:'Kos Berkah Buah Batu',pemilik:'Owner 1',kamar:15,terisi:12,harga:1000000}];save();}
+function save(){localStorage.setItem('KOS_V2',JSON.stringify(data));render();}
+function pph(om){if(om<500e6)return{label:'GRATIS 0%',cls:'bg-green-100 text-green-700'};if(om<=4.8e9)return{label:'0,5% Final',cls:'bg-blue-100 text-blue-700'};return{label:'Normal',cls:'bg-orange-100'};}
+function render(){document.getElementById('tot').innerText=data.length+124;document.getElementById('tb').innerHTML=data.map((k,i)=>{let om=(k.terisi||10)*k.harga*12;let pp=pph(om);return `<tr class="border-b"><td class="py-3 font-bold">${k.nama}<div class="text-[10px] text-gray-400">${k.kamar} kamar</div></td><td>${k.pemilik}</td><td><span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-[10px]">Terverifikasi</span></td><td>Rp ${(om/1e6).toFixed(0)}jt</td><td><span class="px-2 py-1 rounded-full text-[10px] ${pp.cls}">${pp.label}</span></td><td><button onclick="data.splice(${i},1);save()" class="text-red-500">Hapus</button></td></tr>`}).join('');document.getElementById('info').innerHTML=`Sinkron OK: ${data.length} cabang dari app.html (Dago, Dipatiukur, Buah Batu, + bisa tambah terus) • Total omzet pilot Rp ${(data.reduce((s,k)=>s+(k.terisi||10)*k.harga*12,0)/1e6).toFixed(0)}jt/thn • Semua <500jt = GRATIS sesuai UU HKPD 1/2022 - Bebas PBJT 5%/7%`;}
+function tambah(){let n=prompt('Nama cabang baru, misal Kos Berkah Cikutra:');if(!n)return;data.push({nama:n,pemilik:'Owner 1',kamar:12,terisi:10,harga:1200000});save();}
+render();
+</script>
+</body></html>
