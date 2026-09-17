@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KOS LEGAL JABAR - Pitch Deck</title>
+<title>KOS LEGAL JABAR - 40rb Kos Tidak Terdata</title>
 <script src="https://cdn.tailwindcss.com"></script>
-</head><body class="bg-gray-200 p-4">
-<div class="max-w-4xl mx-auto space-y-6">
-<div class="bg-white rounded-3xl p-8 shadow-xl">
-<h1 class="text-3xl font-black">KOS LEGAL JABAR - 40.000 Kos Tidak Terdata</h1>
-<p class="text-sm text-gray-600 mt-2">Solusi UU HKPD No.1/2022 - Bebas PBJT 5%/7%, PPh <500jt GRATIS, fitur tambah cabang tidak terbatas.</p>
-<div class="grid grid-cols-3 gap-3 mt-6 text-xs">
-<div class="bg-green-50 border p-3 rounded-xl"><b>Pemilik Kos</b><br>Badge Hijau, tambah cabang Dago Dipatiukur Buah Batu + terus</div>
-<div class="bg-blue-50 border p-3 rounded-xl"><b>Warga</b><br>Cek QR Hijau/Merah, lapor 1 klik</div>
-<div class="bg-[#0B3D91] text-white p-3 rounded-xl"><b>Pemda</b><br>Dashboard 40rb kos, peta, ketertiban</div>
+</head><body class="bg-[#EEF2FF] p-4 md:p-8">
+<div class="max-w-5xl mx-auto bg-white rounded-[24px] shadow-xl p-6 md:p-10 border">
+<h1 class="text-2xl md:text-3xl font-black text-[#0B1930]">KOS LEGAL JABAR - 40.000 Kos Tidak Terdata</h1>
+<p class="text-sm text-gray-500 mt-2">Solusi UU HKPD No.1/2022 - Bebas PBJT 5%/7%, PPh &lt;500jt GRATIS, fitur tambah cabang tidak terbatas.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+<div class="bg-blue-50 border rounded-xl p-4"><b class="text-sm">Pemilik Kos</b><div class="text-xs text-gray-600 mt-1">Badge Hijau, tambah cabang Dago Dipatiukur Buah Batu + terus, hitung PPh otomatis</div></div>
+<div class="bg-gray-50 border rounded-xl p-4"><b class="text-sm">Warga</b><div class="text-xs text-gray-600 mt-1">Cek QR Hijau/Merah, lapor 1 klik, kos legal terverifikasi RT/RW</div></div>
+<a href="dashboard.html" class="bg-[#0B3D91] text-white rounded-xl p-4 block"><b class="text-sm">Pemda</b><div class="text-xs opacity-80 mt-1">Dashboard 40rb kos, peta, ketertiban, sinkron app.html → dashboard.html</div></a>
 </div>
-<div class="mt-6">
-<input id="jml" type="number" value="15" class="border rounded px-2 py-1 w-20" placeholder="Kamar">
-<input id="isi" type="number" value="12" class="border rounded px-2 py-1 w-20" placeholder="Terisi">
-<input id="harga" type="number" value="1200000" class="border rounded px-2 py-1" placeholder="Harga">
-<button onclick="hitung()" class="bg-[#0B3D91] text-white px-4 py-1 rounded-full">Hitung PPh</button>
-<div id="hasil" class="mt-2 bg-[#0B3D91] text-white p-3 rounded-xl text-sm"></div>
+
+<div class="mt-8 bg-[#F8FAFF] border rounded-2xl p-5">
+<h3 class="font-bold text-sm">Kalkulator PPh 2022 (Bukan PBJT Hotel lagi)</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+<div><label class="text-[11px] text-gray-500">JUMLAH KAMAR TOTAL</label><input id="k1" type="number" value="15" class="w-full border rounded-xl px-3 py-2 font-bold"></div>
+<div><label class="text-[11px] text-gray-500">KAMAR TERISI</label><input id="k2" type="number" value="12" class="w-full border rounded-xl px-3 py-2 font-bold"></div>
+<div><label class="text-[11px] text-gray-500">HARGA / BULAN</label><input id="k3" type="number" value="1200000" class="w-full border rounded-xl px-3 py-2 font-bold"></div>
+<div class="flex items-end"><button onclick="hitung()" class="w-full bg-[#0B3D91] text-white rounded-xl py-2.5 font-bold text-sm">Hitung PPh</button></div>
+</div>
+<div id="hasil" class="mt-4 bg-[#0B3D91] text-white rounded-xl px-4 py-3 font-bold text-sm">Omzet/tahun Rp 172.800.000 = GRATIS 0%</div>
+<div class="text-[11px] text-gray-500 mt-2">Rumus: Kamar TERISI x Harga x 12 bulan. Jika &lt;500jt = GRATIS, 500jt-4,8M = 0,5% final.</div>
+</div>
+
+<div class="mt-6 flex gap-3 text-xs">
+<a href="app.html" class="bg-white border px-5 py-2.5 rounded-full font-bold">→ Buka App Pemilik (Tambah Cabang)</a>
+<a href="dashboard.html" class="bg-[#0B3D91] text-white px-5 py-2.5 rounded-full font-bold">→ Buka Dashboard DPKP</a>
 </div>
 </div>
 <script>
-function hitung(){let j=document.getElementById('isi').value||0;let h=document.getElementById('harga').value||0;let om=j*h*12;let s=om<500000000?'GRATIS 0%':'0,5% = Rp '+(om*0.005).toLocaleString('id-ID');document.getElementById('hasil').innerHTML='Omzet/tahun Rp '+om.toLocaleString('id-ID')+' = '+s}hitung()
+function hitung(){
+let t=parseInt(document.getElementById('k2').value)||0;
+let h=parseInt(document.getElementById('k3').value)||0;
+let om=t*h*12;
+let txt=om<500000000?'GRATIS 0% (UU HKPD 2022)':om<=4800000000?'0,5% Final = Rp '+(om*0.005).toLocaleString('id-ID'):'Tarif Normal';
+document.getElementById('hasil').innerText=`Omzet/tahun Rp ${om.toLocaleString('id-ID')} = ${txt}`;
+// save ke app
+let data=JSON.parse(localStorage.getItem('KOS_V2')||'[]');
+if(data.length>0){data[0].kamar=parseInt(document.getElementById('k1').value); data[0].terisi=t; data[0].harga=h; localStorage.setItem('KOS_V2',JSON.stringify(data));}
+}
+hitung();
 </script>
-</div></body></html>
+</body></html>
