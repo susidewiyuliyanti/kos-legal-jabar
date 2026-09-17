@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KOS LEGAL JABAR - Pitch Deck</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head><body class="bg-gray-200 p-4">
+<div class="max-w-4xl mx-auto space-y-6">
+<div class="bg-white rounded-3xl p-8 shadow-xl">
+<h1 class="text-3xl font-black">KOS LEGAL JABAR - 40.000 Kos Tidak Terdata</h1>
+<p class="text-sm text-gray-600 mt-2">Solusi UU HKPD No.1/2022 - Bebas PBJT 5%/7%, PPh <500jt GRATIS, fitur tambah cabang tidak terbatas.</p>
+<div class="grid grid-cols-3 gap-3 mt-6 text-xs">
+<div class="bg-green-50 border p-3 rounded-xl"><b>Pemilik Kos</b><br>Badge Hijau, tambah cabang Dago Dipatiukur Buah Batu + terus</div>
+<div class="bg-blue-50 border p-3 rounded-xl"><b>Warga</b><br>Cek QR Hijau/Merah, lapor 1 klik</div>
+<div class="bg-[#0B3D91] text-white p-3 rounded-xl"><b>Pemda</b><br>Dashboard 40rb kos, peta, ketertiban</div>
+</div>
+<div class="mt-6">
+<input id="jml" type="number" value="15" class="border rounded px-2 py-1 w-20" placeholder="Kamar">
+<input id="isi" type="number" value="12" class="border rounded px-2 py-1 w-20" placeholder="Terisi">
+<input id="harga" type="number" value="1200000" class="border rounded px-2 py-1" placeholder="Harga">
+<button onclick="hitung()" class="bg-[#0B3D91] text-white px-4 py-1 rounded-full">Hitung PPh</button>
+<div id="hasil" class="mt-2 bg-[#0B3D91] text-white p-3 rounded-xl text-sm"></div>
+</div>
+</div>
+<script>
+function hitung(){let j=document.getElementById('isi').value||0;let h=document.getElementById('harga').value||0;let om=j*h*12;let s=om<500000000?'GRATIS 0%':'0,5% = Rp '+(om*0.005).toLocaleString('id-ID');document.getElementById('hasil').innerHTML='Omzet/tahun Rp '+om.toLocaleString('id-ID')+' = '+s}hitung()
+</script>
+</div></body></html>
